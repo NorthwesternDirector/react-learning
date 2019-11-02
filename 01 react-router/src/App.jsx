@@ -5,7 +5,9 @@ import Home from '../components/home'
 import About from '../components/about'
 import Moive from '../components/moive'
 
-import {DatePicker} from 'antd'
+import store from './store/index'
+ 
+import {DatePicker, Input, Button} from 'antd'
 
 export default class App extends React.Component{
   constructor(props){
@@ -19,6 +21,8 @@ export default class App extends React.Component{
     <hr/>
     <DatePicker/>
     <hr/>
+    <Input  style={{width:'300px',margin:'0px 10px'}} value={store.getState().inputValue} onChange={this.handleInputChange}></Input><Button type="danger">无情 </Button>
+    <hr/>
     <Link to="/home">首页</Link>&nbsp;&nbsp;
     <Link to="/movie/top250/20">电影</Link>&nbsp;&nbsp;
     <Link to="/about">关于</Link>&nbsp;&nbsp;
@@ -30,5 +34,13 @@ export default class App extends React.Component{
   </div>
   
   </HashRouter>
+  }
+
+  handleInputChange(e){
+    const action = {
+      type: 'change_input_value',
+      value: e.target.value
+    }
+    store.dispatch()
   }
 }
